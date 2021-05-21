@@ -6,7 +6,7 @@ import {
   isCommand,
   CanMoveTo,
   DIRECTION_VALUES_SEQUENCE,
-} from "./types-consts";
+} from "./typesAndConsts";
 
 class Rover {
   x: number;

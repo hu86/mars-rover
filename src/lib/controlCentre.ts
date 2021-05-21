@@ -1,4 +1,4 @@
-import { Input, Position } from "./types-consts";
+import { Input, Position } from "./typesAndConsts";
 import Rover from "./rover";
 
 class ControlCentre {

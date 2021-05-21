@@ -2,8 +2,8 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import { Input } from "./lib/types-consts";
-import ControlCentre from "./lib/control-centre";
+import { Input } from "./lib/typesAndConsts";
+import ControlCentre from "./lib/controlCentre";
 
 function App() {
   const input: Input = {
