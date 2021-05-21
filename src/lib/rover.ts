@@ -6,6 +6,7 @@ import {
   isCommand,
   CanMoveTo,
   DIRECTION_VALUES_SEQUENCE,
+  SnapShot,
 } from "./typesAndConsts";
 
 class Rover {
@@ -13,7 +14,8 @@ class Rover {
   y: number;
   direction: Direction;
   commands: Command[];
-  history: Command[] = [];
+  excutedCommands: Command[] = [];
+  snapShots: SnapShot[] = [];
   constructor(
     input: RoverInput = {
       x: 0,
@@ -27,12 +29,22 @@ class Rover {
     this.direction = input.direction;
     // TODO - catch the invalid commands?
     this.commands = input.commands.split("").filter(isCommand);
+    this.snapShots.push({
+      x: this.x,
+      y: this.y,
+      direction: this.direction,
+    });
   }
   next(): void {
     const command = this.commands.shift();
     if (command) {
-      this.history.push(command);
+      this.excutedCommands.push(command);
     }
+    this.snapShots.push({
+      x: this.x,
+      y: this.y,
+      direction: this.direction,
+    });
     // console.log(`${this.x} ${this.y} ${this.direction}`);
   }
   performCommands(canMoveTo: CanMoveTo): void {

@@ -107,14 +107,14 @@ test("rover completes one command and is ready for the next one", () => {
   };
   const rover = new Rover(input);
   expect(rover.commands.length).toBe(2);
-  expect(rover.history.length).toBe(0);
+  expect(rover.excutedCommands.length).toBe(0);
   expect(rover.commands[0]).toBe("L");
   expect(rover.commands[1]).toBe("M");
   rover.next();
   expect(rover.commands.length).toBe(1);
-  expect(rover.history.length).toBe(1);
+  expect(rover.excutedCommands.length).toBe(1);
   expect(rover.commands[0]).toBe("M");
-  expect(rover.history[0]).toBe("L");
+  expect(rover.excutedCommands[0]).toBe("L");
 });
 
 test("rover completes a series of commands", () => {
@@ -126,8 +126,8 @@ test("rover completes a series of commands", () => {
   };
   const rover = new Rover(input);
   expect(rover.commands.length).toBe(6);
-  expect(rover.history.length).toBe(0);
+  expect(rover.excutedCommands.length).toBe(0);
   rover.performCommands(() => true);
   expect(rover.commands.length).toBe(0);
-  expect(rover.history.length).toBe(6);
+  expect(rover.excutedCommands.length).toBe(6);
 });

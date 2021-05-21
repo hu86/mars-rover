@@ -40,3 +40,9 @@ export interface Position {
   x: number;
   y: number;
 }
+
+export interface SnapShot {
+  x: number;
+  y: number;
+  direction: Direction;
+}
