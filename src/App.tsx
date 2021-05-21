@@ -2,7 +2,8 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import ControlCentre, { Input } from "./challange";
+import { Input } from "./lib/types-consts";
+import ControlCentre from "./lib/control-centre";
 
 function App() {
   const input: Input = {
