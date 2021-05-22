@@ -42,7 +42,7 @@ export function parseInput(inputString: string): Input {
     if (uniquePosStrings.indexOf(posStr) === -1) {
       uniquePosStrings.push(posStr);
     } else {
-      throw `Invalid input string. Antoher rover is already positioned at the same spot: '${posStr}'.`;
+      throw `Invalid input string. Another rover is already positioned at the same spot: '${posStr}'.`;
     }
     const x = parseInt(xStr);
     const y = parseInt(yStr);

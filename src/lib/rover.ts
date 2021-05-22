@@ -10,7 +10,7 @@ import {
 
 class Rover {
   commands: Command[];
-  excutedCommands: Command[] = [];
+  executedCommands: Command[] = [];
 
   status: RoverStatus;
   statuses: RoverStatus[] = [];
@@ -32,9 +32,10 @@ class Rover {
     this.statuses.push(this.status);
   }
 
-  excuteCommands(canMoveTo: CanMoveTo): void {
+  executeCommands(canMoveTo: CanMoveTo): void {
     while (this.commands.length > 0) {
       const nextCommand = this.commands[0];
+      // console.log(`executing command ${nextCommand}`);
       let newPos: Position;
       let newDirection: Direction;
       switch (nextCommand) {
@@ -54,13 +55,13 @@ class Rover {
               ...newPos,
             };
           } else {
-            throw `Simulation terminiated. Rover cannot be moved to position: ${newPos.x}-${newPos.y}`;
+            throw `Simulation terminated. Rover cannot be moved to position: ${newPos.x}-${newPos.y}`;
           }
           break;
       }
       const command = this.commands.shift();
       if (command) {
-        this.excutedCommands.push(command);
+        this.executedCommands.push(command);
       }
       this.statuses.push(this.status);
     }

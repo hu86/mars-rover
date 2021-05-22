@@ -13,8 +13,9 @@ class ControlCentre {
   }
 
   moveRovers(): void {
-    this.rovers.forEach((rover) => {
-      rover.excuteCommands((pos): boolean => this.canMoveRoverTo(pos));
+    this.rovers.forEach((rover /*, i*/) => {
+      // console.log(`rover ${i} started`);
+      rover.executeCommands((pos): boolean => this.canMoveRoverTo(pos));
     });
   }
 

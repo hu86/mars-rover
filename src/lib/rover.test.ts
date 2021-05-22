@@ -150,7 +150,7 @@ test("rover is moved to a new position", () => {
   };
   const rover = new Rover(input);
   expect(rover.status).toEqual({ x: 1, y: 1, direction: "E" });
-  rover.excuteCommands(() => true);
+  rover.executeCommands(() => true);
   expect(rover.status).toEqual({ x: 2, y: 1, direction: "E" });
 });
 
@@ -164,8 +164,8 @@ test("rover is not moved to a new position", () => {
   const rover = new Rover(input);
   expect(rover.status.x).toBe(0);
   expect(rover.status.y).toBe(0);
-  expect(() => rover.excuteCommands(() => false)).toThrow(
-    /Simulation terminiated/g
+  expect(() => rover.executeCommands(() => false)).toThrow(
+    /Simulation terminated/g
   );
   expect(rover.status.x).toBe(0);
   expect(rover.status.y).toBe(0);
@@ -180,8 +180,8 @@ test("rover completes a series of commands", () => {
   };
   const rover = new Rover(input);
   expect(rover.commands.length).toBe(6);
-  expect(rover.excutedCommands.length).toBe(0);
-  rover.excuteCommands(() => true);
+  expect(rover.executedCommands.length).toBe(0);
+  rover.executeCommands(() => true);
   expect(rover.commands.length).toBe(0);
-  expect(rover.excutedCommands.length).toBe(6);
+  expect(rover.executedCommands.length).toBe(6);
 });
