@@ -16,6 +16,7 @@ class Rover {
   commands: Command[];
   excutedCommands: Command[] = [];
   snapShots: SnapShot[] = [];
+
   constructor(
     input: RoverInput = {
       x: 0,
@@ -35,6 +36,7 @@ class Rover {
       direction: this.direction,
     });
   }
+
   next(): void {
     const command = this.commands.shift();
     if (command) {
@@ -47,16 +49,18 @@ class Rover {
     });
     // console.log(`${this.x} ${this.y} ${this.direction}`);
   }
+
   performCommands(canMoveTo: CanMoveTo): void {
     while (this.commands.length > 0) {
       const nextCommand = this.commands[0];
+      let newPos: Position;
       switch (nextCommand) {
         case "L":
         case "R":
           this.turn(nextCommand);
           break;
         case "M":
-          let newPos = this.nextPosition();
+          newPos = this.nextPosition();
           if (canMoveTo(newPos)) {
             this.moveTo(newPos);
           } else {
@@ -66,6 +70,7 @@ class Rover {
       this.next();
     }
   }
+
   turn(command: "L" | "R"): void {
     let newDirectionIndex: number;
     newDirectionIndex =
@@ -78,9 +83,10 @@ class Rover {
     }
     this.direction = DIRECTION_VALUES_SEQUENCE[newDirectionIndex];
   }
+
   nextPosition(): Position {
-    let x = this.x;
-    let y = this.y;
+    let { x } = this;
+    let { y } = this;
     switch (this.direction) {
       case "E":
         x++;
@@ -97,6 +103,7 @@ class Rover {
     }
     return { x, y };
   }
+
   moveTo(pos: Position): void {
     this.x = pos.x;
     this.y = pos.y;

@@ -5,18 +5,19 @@ class ControlCentre {
   maxX: number;
   maxY: number;
   rovers: Rover[];
+
   constructor(input: Input) {
     this.maxX = input.plateau.x;
     this.maxY = input.plateau.y;
     this.rovers = input.rovers.map((roverInput) => new Rover(roverInput));
   }
+
   moveRovers(): void {
     this.rovers.forEach((rover) => {
-      rover.performCommands((pos): boolean => {
-        return this.canMoveRoverTo(pos);
-      });
+      rover.performCommands((pos): boolean => this.canMoveRoverTo(pos));
     });
   }
+
   canMoveRoverTo(pos: Position): boolean {
     if (pos.x > this.maxX || pos.x < 0) {
       return false;
@@ -26,6 +27,7 @@ class ControlCentre {
     }
     return !this.rovers.some((rover) => rover.x === pos.x && rover.y === pos.y);
   }
+
   reportRovers(): string {
     return this.rovers
       .map((rover) => `${rover.x} ${rover.y} ${rover.direction}`)

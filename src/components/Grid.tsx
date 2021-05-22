@@ -5,7 +5,7 @@ import Rover from "./Rover";
 import { Input } from "../lib/typesAndConsts";
 import ControlCentre from "../lib/controlCentre";
 
-export default () => {
+export default function Grid(): JSX.Element {
   const controlCentre = useMemo(() => {
     const input: Input = {
       plateau: {
@@ -49,7 +49,7 @@ export default () => {
   const width = cellSize * (controlCentre.maxX + 1);
   const height = cellSize * (controlCentre.maxY + 1);
   const getCells = () => {
-    let cells: JSX.Element[] = [];
+    const cells: JSX.Element[] = [];
     for (let i = 0; i < controlCentre.maxY + 1; i++) {
       for (let j = 0; j < controlCentre.maxX + 1; j++) {
         cells.push(
@@ -76,4 +76,4 @@ export default () => {
       />
     </svg>
   );
-};
+}

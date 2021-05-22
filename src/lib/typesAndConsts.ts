@@ -32,13 +32,13 @@ export interface Input {
   rovers: RoverInput[];
 }
 
-export interface CanMoveTo {
-  (pos: Position): boolean;
-}
-
 export interface Position {
   x: number;
   y: number;
+}
+
+export interface CanMoveTo {
+  (pos: Position): boolean;
 }
 
 export interface SnapShot {

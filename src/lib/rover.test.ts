@@ -74,7 +74,7 @@ test("rover is moved to a new position", () => {
   const rover = new Rover(input);
   expect(rover.x).toBe(1);
   expect(rover.y).toBe(1);
-  let newPos: Position = {
+  const newPos: Position = {
     x: 2,
     y: 1,
   };

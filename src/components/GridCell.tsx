@@ -6,7 +6,7 @@ interface GridCellProps {
   y: number;
 }
 
-export default (prop: GridCellProps) => {
+export default function GridCell(prop: GridCellProps): JSX.Element {
   const { size, x, y } = prop;
   return (
     <rect
@@ -19,4 +19,4 @@ export default (prop: GridCellProps) => {
       style={{ strokeWidth: 1, stroke: "black", fill: "white" }}
     />
   );
-};
+}

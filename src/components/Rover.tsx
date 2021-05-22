@@ -5,7 +5,7 @@ interface RoverProps {
   cy: number;
 }
 
-export default (prop: RoverProps) => {
+export default function Rover(prop: RoverProps): JSX.Element {
   const { cx, cy } = prop;
   return <circle cx={cx} cy={cy} r="40" />;
-};
+}
