@@ -2,7 +2,6 @@ import {
   Command,
   RoverInput,
   Position,
-  isCommand,
   CanMoveTo,
   DIRECTION_VALUES_SEQUENCE,
   RoverStatus,
@@ -21,7 +20,7 @@ class Rover {
       x: 0,
       y: 0,
       direction: "N",
-      commands: "",
+      commands: [],
     }
   ) {
     this.status = {
@@ -29,8 +28,7 @@ class Rover {
       y: input.y,
       direction: input.direction,
     };
-    // TODO - catch the invalid commands?
-    this.commands = input.commands.split("").filter(isCommand);
+    this.commands = input.commands;
     this.statuses.push(this.status);
   }
 
@@ -56,7 +54,7 @@ class Rover {
               ...newPos,
             };
           } else {
-            // TODO
+            throw `Simulation terminiated. Rover cannot be moved to position: ${newPos.x}-${newPos.y}`;
           }
           break;
       }

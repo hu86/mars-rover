@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { TextareaAutosize, Typography } from "@material-ui/core";
 import "./App.css";
 import ControlCentre from "./lib/controlCentre";
-import { parseInput, parseOutput } from "./lib/parser";
+import { parseInput } from "./lib/parser";
+import { formatOutput } from "./lib/formatter";
 
 function App(): JSX.Element {
   const [inputString, setInputString] = useState(
@@ -17,7 +18,7 @@ function App(): JSX.Element {
       const controlCentre = new ControlCentre(input);
       controlCentre.moveRovers();
       const output = controlCentre.getOutput();
-      setOutputString(parseOutput(output));
+      setOutputString(formatOutput(output));
     } catch (error) {
       setError(error);
     }

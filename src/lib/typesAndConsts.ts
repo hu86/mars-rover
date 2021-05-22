@@ -34,7 +34,7 @@ export interface RoverInput {
   x: number;
   y: number;
   direction: Direction;
-  commands: string;
+  commands: Command[];
 }
 
 export interface PlateauInput {
@@ -54,3 +54,8 @@ export interface Output {
 export interface CanMoveTo {
   (pos: Position): boolean;
 }
+
+export const REG_EXP_EOL = /\r?\n/g;
+export const REG_EXP_FIRST_LINE = /^\d+ \d+$/g;
+export const REG_EXP_ROVER_POS = /^\d+ \d+ [NSEW]$/g;
+export const REG_EXP_ROVER_COM = /^[LRM]+$/g;

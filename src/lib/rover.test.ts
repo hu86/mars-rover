@@ -10,7 +10,7 @@ test("calculate rover's next direction", () => {
     x: 0,
     y: 0,
     direction: "N",
-    commands: "",
+    commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("L");
@@ -20,7 +20,7 @@ test("calculate rover's next direction", () => {
     x: 0,
     y: 0,
     direction: "W",
-    commands: "",
+    commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("L");
@@ -30,7 +30,7 @@ test("calculate rover's next direction", () => {
     x: 0,
     y: 0,
     direction: "S",
-    commands: "",
+    commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("L");
@@ -40,7 +40,7 @@ test("calculate rover's next direction", () => {
     x: 0,
     y: 0,
     direction: "E",
-    commands: "",
+    commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("L");
@@ -50,7 +50,7 @@ test("calculate rover's next direction", () => {
     x: 0,
     y: 0,
     direction: "N",
-    commands: "",
+    commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("R");
@@ -60,7 +60,7 @@ test("calculate rover's next direction", () => {
     x: 0,
     y: 0,
     direction: "E",
-    commands: "",
+    commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("R");
@@ -70,7 +70,7 @@ test("calculate rover's next direction", () => {
     x: 0,
     y: 0,
     direction: "S",
-    commands: "",
+    commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("R");
@@ -80,7 +80,7 @@ test("calculate rover's next direction", () => {
     x: 0,
     y: 0,
     direction: "W",
-    commands: "",
+    commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("R");
@@ -97,7 +97,7 @@ test("calculate rover's next position", () => {
     x: 1,
     y: 1,
     direction: "N",
-    commands: "",
+    commands: [],
   };
   rover = new Rover(input);
   newPos = rover.calculateNextPosition();
@@ -109,7 +109,7 @@ test("calculate rover's next position", () => {
     x: 1,
     y: 1,
     direction: "E",
-    commands: "",
+    commands: [],
   };
   rover = new Rover(input);
   newPos = rover.calculateNextPosition();
@@ -121,7 +121,7 @@ test("calculate rover's next position", () => {
     x: 1,
     y: 1,
     direction: "S",
-    commands: "",
+    commands: [],
   };
   rover = new Rover(input);
   newPos = rover.calculateNextPosition();
@@ -133,7 +133,7 @@ test("calculate rover's next position", () => {
     x: 1,
     y: 1,
     direction: "W",
-    commands: "",
+    commands: [],
   };
   rover = new Rover(input);
   newPos = rover.calculateNextPosition();
@@ -146,7 +146,7 @@ test("rover is moved to a new position", () => {
     x: 1,
     y: 1,
     direction: "E",
-    commands: "M",
+    commands: ["M"],
   };
   const rover = new Rover(input);
   expect(rover.status).toEqual({ x: 1, y: 1, direction: "E" });
@@ -159,12 +159,14 @@ test("rover is not moved to a new position", () => {
     x: 0,
     y: 0,
     direction: "N",
-    commands: "LM",
+    commands: ["L", "M"],
   };
   const rover = new Rover(input);
   expect(rover.status.x).toBe(0);
   expect(rover.status.y).toBe(0);
-  rover.excuteCommands(() => false);
+  expect(() => rover.excuteCommands(() => false)).toThrow(
+    /Simulation terminiated/g
+  );
   expect(rover.status.x).toBe(0);
   expect(rover.status.y).toBe(0);
 });
@@ -174,7 +176,7 @@ test("rover completes a series of commands", () => {
     x: 5,
     y: 5,
     direction: "N",
-    commands: "LMLMLM",
+    commands: ["L", "M", "L", "M", "L", "M"],
   };
   const rover = new Rover(input);
   expect(rover.commands.length).toBe(6);

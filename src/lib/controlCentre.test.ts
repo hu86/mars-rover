@@ -12,13 +12,13 @@ test("move rovers to positions with commands", () => {
         x: 1,
         y: 2,
         direction: "N",
-        commands: "LMLMLMLMM",
+        commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"],
       },
       {
         x: 3,
         y: 3,
         direction: "E",
-        commands: "MMRMMRMRRM",
+        commands: ["M", "M", "R", "M", "M", "R", "M", "R", "R", "M"],
       },
     ],
   };
@@ -58,7 +58,7 @@ test("can move rover to a position", () => {
         x: 1,
         y: 2,
         direction: "N",
-        commands: "LMLMLMLMM",
+        commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"],
       },
     ],
   };
@@ -78,7 +78,7 @@ test("can not move rover to a position - edge of plateau", () => {
         x: 1,
         y: 5,
         direction: "N",
-        commands: "LMLMLMLMM",
+        commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"],
       },
     ],
   };
@@ -98,13 +98,13 @@ test("can not move rover to a position - occupied by another rover", () => {
         x: 1,
         y: 2,
         direction: "N",
-        commands: "LMLMLMLMM",
+        commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"],
       },
       {
         x: 1,
         y: 3,
         direction: "N",
-        commands: "LMLMLMLMM",
+        commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"],
       },
     ],
   };
