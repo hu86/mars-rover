@@ -2,6 +2,12 @@ export type Direction = "E" | "W" | "N" | "S";
 
 export const DIRECTION_VALUES_SEQUENCE: Direction[] = ["E", "S", "W", "N"];
 
+export function isDirection(
+  direction: string | Direction
+): direction is Direction {
+  return DIRECTION_VALUES_SEQUENCE.indexOf(direction as Direction) !== -1;
+}
+
 export type Command = "L" | "R" | "M";
 
 export function isCommand(command: string | Command): command is Command {
@@ -13,6 +19,15 @@ export function isCommand(command: string | Command): command is Command {
     default:
       return false;
   }
+}
+
+export interface Position {
+  x: number;
+  y: number;
+}
+
+export interface RoverStatus extends Position {
+  direction: Direction;
 }
 
 export interface RoverInput {
@@ -32,17 +47,10 @@ export interface Input {
   rovers: RoverInput[];
 }
 
-export interface Position {
-  x: number;
-  y: number;
+export interface Output {
+  roverStatuses: RoverStatus[];
 }
 
 export interface CanMoveTo {
   (pos: Position): boolean;
-}
-
-export interface SnapShot {
-  x: number;
-  y: number;
-  direction: Direction;
 }

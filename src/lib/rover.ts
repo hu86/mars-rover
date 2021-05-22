@@ -1,21 +1,20 @@
 import {
-  Direction,
   Command,
   RoverInput,
   Position,
   isCommand,
   CanMoveTo,
   DIRECTION_VALUES_SEQUENCE,
-  SnapShot,
+  RoverStatus,
+  Direction,
 } from "./typesAndConsts";
 
 class Rover {
-  x: number;
-  y: number;
-  direction: Direction;
   commands: Command[];
   excutedCommands: Command[] = [];
-  snapShots: SnapShot[] = [];
+
+  status: RoverStatus;
+  statuses: RoverStatus[] = [];
 
   constructor(
     input: RoverInput = {
@@ -25,69 +24,67 @@ class Rover {
       commands: "",
     }
   ) {
-    this.x = input.x;
-    this.y = input.y;
-    this.direction = input.direction;
+    this.status = {
+      x: input.x,
+      y: input.y,
+      direction: input.direction,
+    };
     // TODO - catch the invalid commands?
     this.commands = input.commands.split("").filter(isCommand);
-    this.snapShots.push({
-      x: this.x,
-      y: this.y,
-      direction: this.direction,
-    });
+    this.statuses.push(this.status);
   }
 
-  next(): void {
-    const command = this.commands.shift();
-    if (command) {
-      this.excutedCommands.push(command);
-    }
-    this.snapShots.push({
-      x: this.x,
-      y: this.y,
-      direction: this.direction,
-    });
-    // console.log(`${this.x} ${this.y} ${this.direction}`);
-  }
-
-  performCommands(canMoveTo: CanMoveTo): void {
+  excuteCommands(canMoveTo: CanMoveTo): void {
     while (this.commands.length > 0) {
       const nextCommand = this.commands[0];
       let newPos: Position;
+      let newDirection: Direction;
       switch (nextCommand) {
         case "L":
         case "R":
-          this.turn(nextCommand);
+          newDirection = this.calculateNextDirection(nextCommand);
+          this.status = {
+            ...this.status,
+            direction: newDirection,
+          };
           break;
         case "M":
-          newPos = this.nextPosition();
+          newPos = this.calculateNextPosition();
           if (canMoveTo(newPos)) {
-            this.moveTo(newPos);
+            this.status = {
+              ...this.status,
+              ...newPos,
+            };
           } else {
             // TODO
           }
+          break;
       }
-      this.next();
+      const command = this.commands.shift();
+      if (command) {
+        this.excutedCommands.push(command);
+      }
+      this.statuses.push(this.status);
     }
   }
 
-  turn(command: "L" | "R"): void {
+  calculateNextDirection(command: "L" | "R"): Direction {
     let newDirectionIndex: number;
     newDirectionIndex =
-      DIRECTION_VALUES_SEQUENCE.indexOf(this.direction) +
+      DIRECTION_VALUES_SEQUENCE.indexOf(this.status.direction) +
       (command === "L" ? -1 : 1);
     if (newDirectionIndex < 0) {
       newDirectionIndex = DIRECTION_VALUES_SEQUENCE.length - 1;
     } else if (newDirectionIndex > DIRECTION_VALUES_SEQUENCE.length - 1) {
       newDirectionIndex = 0;
     }
-    this.direction = DIRECTION_VALUES_SEQUENCE[newDirectionIndex];
+    return DIRECTION_VALUES_SEQUENCE[newDirectionIndex];
   }
 
-  nextPosition(): Position {
-    let { x } = this;
-    let { y } = this;
-    switch (this.direction) {
+  calculateNextPosition(): Position {
+    let { x } = this.status;
+    let { y } = this.status;
+    switch (this.status.direction) {
       case "E":
         x++;
         break;
@@ -102,11 +99,6 @@ class Rover {
         break;
     }
     return { x, y };
-  }
-
-  moveTo(pos: Position): void {
-    this.x = pos.x;
-    this.y = pos.y;
   }
 }
 

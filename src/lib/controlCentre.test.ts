@@ -24,14 +24,27 @@ test("move rovers to positions with commands", () => {
   };
   const controlCentre = new ControlCentre(input);
   controlCentre.moveRovers();
-  expect(controlCentre.rovers[0].x).toBe(1);
-  expect(controlCentre.rovers[0].y).toBe(3);
-  expect(controlCentre.rovers[0].direction).toBe("N");
-  expect(controlCentre.rovers[1].x).toBe(5);
-  expect(controlCentre.rovers[1].y).toBe(1);
-  expect(controlCentre.rovers[1].direction).toBe("E");
-  const reports = controlCentre.reportRovers();
-  expect(reports).toBe(`1 3 N\r\n5 1 E`);
+  expect(controlCentre.rovers[0].status.x).toBe(1);
+  expect(controlCentre.rovers[0].status.y).toBe(3);
+  expect(controlCentre.rovers[0].status.direction).toBe("N");
+  expect(controlCentre.rovers[1].status.x).toBe(5);
+  expect(controlCentre.rovers[1].status.y).toBe(1);
+  expect(controlCentre.rovers[1].status.direction).toBe("E");
+  const output = controlCentre.getOutput();
+  expect(output).toEqual({
+    roverStatuses: [
+      {
+        x: 1,
+        y: 3,
+        direction: "N",
+      },
+      {
+        x: 5,
+        y: 1,
+        direction: "E",
+      },
+    ],
+  });
 });
 
 test("can move rover to a position", () => {

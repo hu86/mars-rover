@@ -1,4 +1,4 @@
-import { Input, Position } from "./typesAndConsts";
+import { Input, Output, Position } from "./typesAndConsts";
 import Rover from "./rover";
 
 class ControlCentre {
@@ -14,7 +14,7 @@ class ControlCentre {
 
   moveRovers(): void {
     this.rovers.forEach((rover) => {
-      rover.performCommands((pos): boolean => this.canMoveRoverTo(pos));
+      rover.excuteCommands((pos): boolean => this.canMoveRoverTo(pos));
     });
   }
 
@@ -25,13 +25,17 @@ class ControlCentre {
     if (pos.y > this.maxY || pos.y < 0) {
       return false;
     }
-    return !this.rovers.some((rover) => rover.x === pos.x && rover.y === pos.y);
+    return !this.rovers.some(
+      (rover) => rover.status.x === pos.x && rover.status.y === pos.y
+    );
   }
 
-  reportRovers(): string {
-    return this.rovers
-      .map((rover) => `${rover.x} ${rover.y} ${rover.direction}`)
-      .join("\r\n");
+  getOutput(): Output {
+    return {
+      roverStatuses: this.rovers.map((rover) => {
+        return rover.status;
+      }),
+    };
   }
 }
 
