@@ -69,6 +69,7 @@ function App(): JSX.Element {
                 value={inputString}
                 onChange={(e) => setInputString(e.target.value)}
                 placeholder="Add your input string here"
+                spellCheck={false}
               />
             </Paper>
           </Grid>
@@ -89,6 +90,7 @@ function App(): JSX.Element {
                   variant="outlined"
                   value={outputString}
                   disabled
+                  spellCheck={false}
                 />
               )}
             </Paper>
