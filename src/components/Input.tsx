@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, TextField } from "@material-ui/core";
 import {
@@ -19,11 +19,9 @@ const Input = (): JSX.Element => {
   const classes = useStyles();
   const { state, dispatch } = useSimulatorProvider();
   const { inputString } = state;
-
-  useEffect(() => {
-    runSimulation(dispatch, inputString);
-  }, [inputString]);
-
+  const handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
+    e
+  ) => runSimulation(dispatch, e.target.value);
   return (
     <Paper className={classes.paper} elevation={0}>
       <TextField
@@ -34,7 +32,7 @@ const Input = (): JSX.Element => {
         rows={11}
         variant="outlined"
         value={inputString}
-        onChange={(e) => runSimulation(dispatch, e.target.value)}
+        onChange={handleInputChange}
         placeholder="Add your input string here"
         spellCheck={false}
       />

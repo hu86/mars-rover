@@ -64,7 +64,7 @@ class Rover {
               ...newPos,
             };
           } else {
-            throw `Simulation terminated. Rover cannot be moved to position: ${newPos.x}-${newPos.y}`;
+            throw `Simulation terminated. Rover cannot be moved to position ${newPos.x}, ${newPos.y}`;
           }
           break;
       }

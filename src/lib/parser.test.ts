@@ -85,6 +85,6 @@ test("parse an input string to input object - more than one rovers at the same p
 test("parse an input string to input object - invalid rover commands line", () => {
   const inputString = "5 5\r\n1 2 N\r\nLMLMLMLMM\r\n3 6 N\r\nMMRMMRMRRM";
   expect(() => parseInput(inputString)).toThrow(
-    /^Invalid input string\. Rover's position is outside the plateau/g
+    /^Invalid input string. Rover's position 3, 6 is outside the plateau.$/g
   );
 });

@@ -58,7 +58,7 @@ export function parseInput(inputString: string): Input {
     const x = parseInt(xStr);
     const y = parseInt(yStr);
     if (x > plateauX || y > plateauY) {
-      throw `Invalid input string. Rover's position is outside the plateau: '${lines[0]}'.`;
+      throw `Invalid input string. Rover's position ${xStr}, ${yStr} is outside the plateau.`;
     }
     if (!isDirection(direction)) {
       throw `Invalid input string. Invalid rover direction: '${direction}'.`;
