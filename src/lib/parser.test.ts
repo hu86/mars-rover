@@ -1,4 +1,5 @@
 import { parseInput } from "./parser";
+import { Direction } from "./typesAndConsts";
 
 test("parse an input string to input object", () => {
   const inputString = "5 5\r\n1 2 N\r\nLMLMLMLMM\r\n3 3 E\r\nMMRMMRMRRM";
@@ -12,13 +13,13 @@ test("parse an input string to input object", () => {
       {
         x: 1,
         y: 2,
-        direction: "N",
+        direction: Direction.NORTH,
         commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"],
       },
       {
         x: 3,
         y: 3,
-        direction: "E",
+        direction: Direction.EAST,
         commands: ["M", "M", "R", "M", "M", "R", "M", "R", "R", "M"],
       },
     ],

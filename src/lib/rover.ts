@@ -23,7 +23,7 @@ class Rover {
     input: RoverInput = {
       x: 0,
       y: 0,
-      direction: "N",
+      direction: Direction.NORTH,
       commands: [],
     }
   ) {
@@ -102,16 +102,16 @@ class Rover {
     let { x } = this.status;
     let { y } = this.status;
     switch (this.status.direction) {
-      case "E":
+      case Direction.EAST:
         x++;
         break;
-      case "W":
+      case Direction.WEST:
         x--;
         break;
-      case "N":
+      case Direction.NORTH:
         y++;
         break;
-      case "S":
+      case Direction.SOUTH:
         y--;
         break;
     }

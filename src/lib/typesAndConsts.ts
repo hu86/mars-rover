@@ -1,7 +1,12 @@
 /**
- * East, West, North and South
+ * Rover's heading: East, West, North or South
  */
-export type Direction = "E" | "W" | "N" | "S";
+export enum Direction {
+  EAST = "E",
+  WEST = "W",
+  NORTH = "N",
+  SOUTH = "S",
+}
 
 /**
  * Representing the sequence of the change of rover's heading by turning left or right
@@ -9,7 +14,12 @@ export type Direction = "E" | "W" | "N" | "S";
  * The order in this array is the same as the rover turning clockwise:
  * East -> South -> West -> North
  */
-export const DIRECTION_VALUES_SEQUENCE: Direction[] = ["E", "S", "W", "N"];
+export const DIRECTION_VALUES_SEQUENCE: Direction[] = [
+  Direction.EAST,
+  Direction.SOUTH,
+  Direction.WEST,
+  Direction.NORTH,
+];
 
 /**
  * Type predicate for Direction

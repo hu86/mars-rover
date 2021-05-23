@@ -1,5 +1,5 @@
 import { formatOutput } from "./formatter";
-import { Output } from "./typesAndConsts";
+import { Direction, Output } from "./typesAndConsts";
 
 test("format an output object as string", () => {
   const output: Output = {
@@ -7,12 +7,12 @@ test("format an output object as string", () => {
       {
         x: 1,
         y: 3,
-        direction: "N",
+        direction: Direction.NORTH,
       },
       {
         x: 5,
         y: 1,
-        direction: "E",
+        direction: Direction.EAST,
       },
     ],
   };

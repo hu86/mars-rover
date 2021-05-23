@@ -9,82 +9,82 @@ test("calculate rover's next direction", () => {
   input = {
     x: 0,
     y: 0,
-    direction: "N",
+    direction: Direction.NORTH,
     commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("L");
-  expect(newDirection).toBe("W");
+  expect(newDirection).toBe(Direction.WEST);
 
   input = {
     x: 0,
     y: 0,
-    direction: "W",
+    direction: Direction.WEST,
     commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("L");
-  expect(newDirection).toBe("S");
+  expect(newDirection).toBe(Direction.SOUTH);
 
   input = {
     x: 0,
     y: 0,
-    direction: "S",
+    direction: Direction.SOUTH,
     commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("L");
-  expect(newDirection).toBe("E");
+  expect(newDirection).toBe(Direction.EAST);
 
   input = {
     x: 0,
     y: 0,
-    direction: "E",
+    direction: Direction.EAST,
     commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("L");
-  expect(newDirection).toBe("N");
+  expect(newDirection).toBe(Direction.NORTH);
 
   input = {
     x: 0,
     y: 0,
-    direction: "N",
+    direction: Direction.NORTH,
     commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("R");
-  expect(newDirection).toBe("E");
+  expect(newDirection).toBe(Direction.EAST);
 
   input = {
     x: 0,
     y: 0,
-    direction: "E",
+    direction: Direction.EAST,
     commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("R");
-  expect(newDirection).toBe("S");
+  expect(newDirection).toBe(Direction.SOUTH);
 
   input = {
     x: 0,
     y: 0,
-    direction: "S",
+    direction: Direction.SOUTH,
     commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("R");
-  expect(newDirection).toBe("W");
+  expect(newDirection).toBe(Direction.WEST);
 
   input = {
     x: 0,
     y: 0,
-    direction: "W",
+    direction: Direction.WEST,
     commands: [],
   };
   rover = new Rover(input);
   newDirection = rover.calculateNextDirection("R");
-  expect(newDirection).toBe("N");
+  expect(newDirection).toBe(Direction.NORTH);
 });
 
 test("calculate rover's next position", () => {
@@ -96,7 +96,7 @@ test("calculate rover's next position", () => {
   input = {
     x: 1,
     y: 1,
-    direction: "N",
+    direction: Direction.NORTH,
     commands: [],
   };
   rover = new Rover(input);
@@ -108,7 +108,7 @@ test("calculate rover's next position", () => {
   input = {
     x: 1,
     y: 1,
-    direction: "E",
+    direction: Direction.EAST,
     commands: [],
   };
   rover = new Rover(input);
@@ -120,7 +120,7 @@ test("calculate rover's next position", () => {
   input = {
     x: 1,
     y: 1,
-    direction: "S",
+    direction: Direction.SOUTH,
     commands: [],
   };
   rover = new Rover(input);
@@ -132,7 +132,7 @@ test("calculate rover's next position", () => {
   input = {
     x: 1,
     y: 1,
-    direction: "W",
+    direction: Direction.WEST,
     commands: [],
   };
   rover = new Rover(input);
@@ -145,20 +145,20 @@ test("rover is moved to a new position", () => {
   const input: RoverInput = {
     x: 1,
     y: 1,
-    direction: "E",
+    direction: Direction.EAST,
     commands: ["M"],
   };
   const rover = new Rover(input);
-  expect(rover.status).toEqual({ x: 1, y: 1, direction: "E" });
+  expect(rover.status).toEqual({ x: 1, y: 1, direction: Direction.EAST });
   rover.executeCommands(() => true);
-  expect(rover.status).toEqual({ x: 2, y: 1, direction: "E" });
+  expect(rover.status).toEqual({ x: 2, y: 1, direction: Direction.EAST });
 });
 
 test("rover is not moved to a new position", () => {
   const input: RoverInput = {
     x: 0,
     y: 0,
-    direction: "N",
+    direction: Direction.NORTH,
     commands: ["L", "M"],
   };
   const rover = new Rover(input);
@@ -175,7 +175,7 @@ test("rover completes a series of commands", () => {
   const input: RoverInput = {
     x: 5,
     y: 5,
-    direction: "N",
+    direction: Direction.NORTH,
     commands: ["L", "M", "L", "M", "L", "M"],
   };
   const rover = new Rover(input);
