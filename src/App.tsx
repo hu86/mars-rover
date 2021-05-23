@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Paper, TextField, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import "./App.css";
 import ControlCentre from "./lib/controlCentre";
 import { parseInput } from "./lib/parser";
 import { formatOutput } from "./lib/formatter";
+import theme from "./muiTheme";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
   },
   header: {
     textAlign: "center",
@@ -46,50 +49,52 @@ function App(): JSX.Element {
     }
   }, [inputString]);
   return (
-    <div className="App">
-      <Grid className={classes.root} container spacing={2}>
-        <Grid className={classes.header} item xs={12}>
-          <Typography variant="h2" gutterBottom>
-            Mars Rover Squad Simulator
-          </Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper} elevation={0}>
-            <TextField
-              className={classes.textField}
-              id="outlined-multiline-static"
-              label="Input"
-              multiline
-              rows={11}
-              variant="outlined"
-              value={inputString}
-              onChange={(e) => setInputString(e.target.value)}
-              placeholder="Add your input string here"
-            />
-          </Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper} elevation={0}>
-            {error ? (
-              <Alert severity="error">
-                <AlertTitle>Error</AlertTitle>
-                {error}
-              </Alert>
-            ) : (
+    <div className="App" role="main">
+      <ThemeProvider theme={theme}>
+        <Grid className={classes.root} container spacing={2}>
+          <Grid className={classes.header} item xs={12}>
+            <Typography variant="h1" gutterBottom>
+              Mars Rover Squad Simulator
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper className={classes.paper} elevation={0}>
               <TextField
                 className={classes.textField}
-                id="outlined-multiline-static"
-                label="Output"
+                id="input-text-field"
+                label="Input"
                 multiline
                 rows={11}
                 variant="outlined"
-                value={outputString}
-                disabled
+                value={inputString}
+                onChange={(e) => setInputString(e.target.value)}
+                placeholder="Add your input string here"
               />
-            )}
-          </Paper>
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper className={classes.paper} elevation={0}>
+              {error ? (
+                <Alert severity="error">
+                  <AlertTitle>Error</AlertTitle>
+                  {error}
+                </Alert>
+              ) : (
+                <TextField
+                  className={classes.textField}
+                  id="output-text-field"
+                  label="Output"
+                  multiline
+                  rows={11}
+                  variant="outlined"
+                  value={outputString}
+                  disabled
+                />
+              )}
+            </Paper>
+          </Grid>
         </Grid>
-      </Grid>
+      </ThemeProvider>
     </div>
   );
 }
