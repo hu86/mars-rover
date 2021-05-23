@@ -9,6 +9,15 @@ import {
   isCommand,
 } from "./typesAndConsts";
 
+/**
+ * Parse an input string to an input object
+ * The input object then can be used to instantiate the ControlCentre class.
+ *
+ * Will throw an error string when the input string is deemed invalid
+ *
+ * @param inputString
+ * @returns
+ */
 export function parseInput(inputString: string): Input {
   const lines = inputString.trim().split(REG_EXP_EOL);
   if (lines.length < 3 || lines.length % 2 === 0) {
@@ -28,6 +37,8 @@ export function parseInput(inputString: string): Input {
       if (!new RegExp(REG_EXP_ROVER_POS).test(line)) {
         throw `Invalid input string. Invalid line for rover's position: '${line}'.`;
       }
+      // Current element is for the rover's position
+      // The next element is for the rover's commands
       accumulator.push([line, arr[i + 1]]);
     } else if (!new RegExp(REG_EXP_ROVER_COM).test(line)) {
       throw `Invalid input string. Invalid line for rover's commands: '${line}'.`;

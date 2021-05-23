@@ -8,6 +8,10 @@ import {
   Direction,
 } from "./typesAndConsts";
 
+/**
+ * For creating Rover object.
+ * To simulate a rover's position and heading change as the rover execute the issued commands
+ */
 class Rover {
   commands: Command[];
   executedCommands: Command[] = [];
@@ -32,6 +36,11 @@ class Rover {
     this.statuses.push(this.status);
   }
 
+  /**
+   * Execute the issued commands in sequence
+   * Can throw error string when a command is not able to be committed
+   * @param canMoveTo external function that determines if the rover is safe to move to its next position
+   */
   executeCommands(canMoveTo: CanMoveTo): void {
     while (this.commands.length > 0) {
       const nextCommand = this.commands[0];
@@ -67,6 +76,11 @@ class Rover {
     }
   }
 
+  /**
+   * Compute the new heading based on current heading and the command (turning left or right)
+   * @param command
+   * @returns
+   */
   calculateNextDirection(command: "L" | "R"): Direction {
     let newDirectionIndex: number;
     newDirectionIndex =
@@ -80,6 +94,10 @@ class Rover {
     return DIRECTION_VALUES_SEQUENCE[newDirectionIndex];
   }
 
+  /**
+   * Compute the new position based on current position
+   * @returns
+   */
   calculateNextPosition(): Position {
     let { x } = this.status;
     let { y } = this.status;
