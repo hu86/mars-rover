@@ -35,7 +35,11 @@ export function isDirection(
 /**
  * Turn Left, Turn Right and Move Forward
  */
-export type Command = "L" | "R" | "M";
+export enum Command {
+  LEFT = "L",
+  RIGHT = "R",
+  MOVE = "M",
+}
 
 /**
  * Type predicate for Command
@@ -44,9 +48,9 @@ export type Command = "L" | "R" | "M";
  */
 export function isCommand(command: string | Command): command is Command {
   switch (command) {
-    case "L":
-    case "R":
-    case "M":
+    case Command.LEFT:
+    case Command.RIGHT:
+    case Command.MOVE:
       return true;
     default:
       return false;

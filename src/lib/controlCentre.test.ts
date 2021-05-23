@@ -1,5 +1,5 @@
 import ControlCentre from "./controlCentre";
-import { Input, Direction } from "./typesAndConsts";
+import { Input, Direction, Command } from "./typesAndConsts";
 
 test("move rovers to positions with commands", () => {
   const input: Input = {
@@ -12,13 +12,34 @@ test("move rovers to positions with commands", () => {
         x: 1,
         y: 2,
         direction: Direction.NORTH,
-        commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"],
+        commands: [
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.MOVE,
+        ],
       },
       {
         x: 3,
         y: 3,
         direction: Direction.EAST,
-        commands: ["M", "M", "R", "M", "M", "R", "M", "R", "R", "M"],
+        commands: [
+          Command.MOVE,
+          Command.MOVE,
+          Command.RIGHT,
+          Command.MOVE,
+          Command.MOVE,
+          Command.RIGHT,
+          Command.MOVE,
+          Command.RIGHT,
+          Command.RIGHT,
+          Command.MOVE,
+        ],
       },
     ],
   };
@@ -58,7 +79,17 @@ test("can move rover to a position", () => {
         x: 1,
         y: 2,
         direction: Direction.NORTH,
-        commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"],
+        commands: [
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.MOVE,
+        ],
       },
     ],
   };
@@ -78,7 +109,17 @@ test("can not move rover to a position - edge of plateau", () => {
         x: 1,
         y: 5,
         direction: Direction.NORTH,
-        commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"],
+        commands: [
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.MOVE,
+        ],
       },
     ],
   };
@@ -98,13 +139,33 @@ test("can not move rover to a position - occupied by another rover", () => {
         x: 1,
         y: 2,
         direction: Direction.NORTH,
-        commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"],
+        commands: [
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.MOVE,
+        ],
       },
       {
         x: 1,
         y: 3,
         direction: Direction.NORTH,
-        commands: ["L", "M", "L", "M", "L", "M", "L", "M", "M"],
+        commands: [
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.LEFT,
+          Command.MOVE,
+          Command.MOVE,
+        ],
       },
     ],
   };

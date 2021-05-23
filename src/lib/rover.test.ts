@@ -1,5 +1,5 @@
 import Rover from "./rover";
-import { Direction, Position, RoverInput } from "./typesAndConsts";
+import { Command, Direction, Position, RoverInput } from "./typesAndConsts";
 
 test("calculate rover's next direction", () => {
   let input: RoverInput;
@@ -13,7 +13,7 @@ test("calculate rover's next direction", () => {
     commands: [],
   };
   rover = new Rover(input);
-  newDirection = rover.calculateNextDirection("L");
+  newDirection = rover.calculateNextDirection(Command.LEFT);
   expect(newDirection).toBe(Direction.WEST);
 
   input = {
@@ -23,7 +23,7 @@ test("calculate rover's next direction", () => {
     commands: [],
   };
   rover = new Rover(input);
-  newDirection = rover.calculateNextDirection("L");
+  newDirection = rover.calculateNextDirection(Command.LEFT);
   expect(newDirection).toBe(Direction.SOUTH);
 
   input = {
@@ -33,7 +33,7 @@ test("calculate rover's next direction", () => {
     commands: [],
   };
   rover = new Rover(input);
-  newDirection = rover.calculateNextDirection("L");
+  newDirection = rover.calculateNextDirection(Command.LEFT);
   expect(newDirection).toBe(Direction.EAST);
 
   input = {
@@ -43,7 +43,7 @@ test("calculate rover's next direction", () => {
     commands: [],
   };
   rover = new Rover(input);
-  newDirection = rover.calculateNextDirection("L");
+  newDirection = rover.calculateNextDirection(Command.LEFT);
   expect(newDirection).toBe(Direction.NORTH);
 
   input = {
@@ -53,7 +53,7 @@ test("calculate rover's next direction", () => {
     commands: [],
   };
   rover = new Rover(input);
-  newDirection = rover.calculateNextDirection("R");
+  newDirection = rover.calculateNextDirection(Command.RIGHT);
   expect(newDirection).toBe(Direction.EAST);
 
   input = {
@@ -63,7 +63,7 @@ test("calculate rover's next direction", () => {
     commands: [],
   };
   rover = new Rover(input);
-  newDirection = rover.calculateNextDirection("R");
+  newDirection = rover.calculateNextDirection(Command.RIGHT);
   expect(newDirection).toBe(Direction.SOUTH);
 
   input = {
@@ -73,7 +73,7 @@ test("calculate rover's next direction", () => {
     commands: [],
   };
   rover = new Rover(input);
-  newDirection = rover.calculateNextDirection("R");
+  newDirection = rover.calculateNextDirection(Command.RIGHT);
   expect(newDirection).toBe(Direction.WEST);
 
   input = {
@@ -83,7 +83,7 @@ test("calculate rover's next direction", () => {
     commands: [],
   };
   rover = new Rover(input);
-  newDirection = rover.calculateNextDirection("R");
+  newDirection = rover.calculateNextDirection(Command.RIGHT);
   expect(newDirection).toBe(Direction.NORTH);
 });
 
@@ -146,7 +146,7 @@ test("rover is moved to a new position", () => {
     x: 1,
     y: 1,
     direction: Direction.EAST,
-    commands: ["M"],
+    commands: [Command.MOVE],
   };
   const rover = new Rover(input);
   expect(rover.status).toEqual({ x: 1, y: 1, direction: Direction.EAST });
@@ -159,7 +159,7 @@ test("rover is not moved to a new position", () => {
     x: 0,
     y: 0,
     direction: Direction.NORTH,
-    commands: ["L", "M"],
+    commands: [Command.LEFT, Command.MOVE],
   };
   const rover = new Rover(input);
   expect(rover.status.x).toBe(0);
@@ -176,7 +176,14 @@ test("rover completes a series of commands", () => {
     x: 5,
     y: 5,
     direction: Direction.NORTH,
-    commands: ["L", "M", "L", "M", "L", "M"],
+    commands: [
+      Command.LEFT,
+      Command.MOVE,
+      Command.LEFT,
+      Command.MOVE,
+      Command.LEFT,
+      Command.MOVE,
+    ],
   };
   const rover = new Rover(input);
   expect(rover.commands.length).toBe(6);

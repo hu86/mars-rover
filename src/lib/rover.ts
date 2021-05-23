@@ -48,15 +48,15 @@ class Rover {
       let newPos: Position;
       let newDirection: Direction;
       switch (nextCommand) {
-        case "L":
-        case "R":
+        case Command.LEFT:
+        case Command.RIGHT:
           newDirection = this.calculateNextDirection(nextCommand);
           this.status = {
             ...this.status,
             direction: newDirection,
           };
           break;
-        case "M":
+        case Command.MOVE:
           newPos = this.calculateNextPosition();
           if (canMoveTo(newPos)) {
             this.status = {
@@ -81,11 +81,11 @@ class Rover {
    * @param command
    * @returns
    */
-  calculateNextDirection(command: "L" | "R"): Direction {
+  calculateNextDirection(command: Command.LEFT | Command.RIGHT): Direction {
     let newDirectionIndex: number;
     newDirectionIndex =
       DIRECTION_VALUES_SEQUENCE.indexOf(this.status.direction) +
-      (command === "L" ? -1 : 1);
+      (command === Command.LEFT ? -1 : 1);
     if (newDirectionIndex < 0) {
       newDirectionIndex = DIRECTION_VALUES_SEQUENCE.length - 1;
     } else if (newDirectionIndex > DIRECTION_VALUES_SEQUENCE.length - 1) {
