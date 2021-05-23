@@ -111,8 +111,10 @@ export interface CanMoveTo {
 /* RegExps for validating input string  */
 export const REG_EXP_EOL = /\r?\n/g;
 export const REG_EXP_FIRST_LINE = /^\d+ \d+$/g;
-export const REG_EXP_ROVER_POS = /^\d+ \d+ [NSEW]$/g;
-export const REG_EXP_ROVER_COM = /^[LRM]+$/g;
+export const REG_EXP_ROVER_POS = `^\\d+ \\d+ [${Object.values(Direction).join(
+  ""
+)}]$`;
+export const REG_EXP_ROVER_COM = `^[${Object.values(Command).join("")}]+$`;
 
 /**
  * Line break for formatting output string
